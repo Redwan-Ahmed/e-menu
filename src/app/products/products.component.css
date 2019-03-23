@@ -1,0 +1,9 @@
+
+.sticky-top {
+    top: 350px;
+    position: fixed;
+}
+
+.sticky-top button{
+    cursor: pointer;
+}

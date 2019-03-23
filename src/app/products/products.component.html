@@ -1,17 +1,43 @@
 <div class="row">
-  <ng-container *ngFor="let p of products$; let i = index">
-    <div class="col">
-        <div class="card" style="width: 15rem;">
-          <img [src]="p.imageUrl" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h4 class="card-title">{{ p.title }}</h4>
-            <h5 class="card-title">{{ p.category }}</h5>
-            <p class="card-text">{{ p.price | currency:'GBP' }}</p>
-            <a href="#" class="btn btn-primary">Add to Cart</a>
+  <div class="col-3">
+        <products-filter [category]="category"></products-filter>
+        <div class="sticky-top" *ngIf="order$?.product; else shoppingArray">
+            <div class="list-group">
+                <li class="list-group-item list-group-item-action list-group-item-success" >Food Cart</li>
+            </div>
+            <div class="list-group list-group-flush">
+                <li class="list-group-item"  
+                *ngFor="let order of order$.product">{{order.title}}, Qty:{{ order.quantity }}</li>
+                <li class="list-group-item" *ngIf="!order$.product?.length > 0">Empty</li>
+                <li class="list-group-item" *ngIf="order$.product?.length > 0">Total Price {{ getTotalCartPrice() | currency:'GBP' }}</li>
+            </div>
+            <button (click)="checkout(model)" *ngIf="order$.product?.length" class="btn btn-primary btn-block" routerLink="shopping-cart">Checkout</button>
           </div>
-        </div>
+          <ng-template #shoppingArray>
+              <div class="sticky-top">
+                  <div class="list-group">
+                      <li class="list-group-item list-group-item-action list-group-item-success" >Food Cart</li>
+                  </div>
+                  <div class="list-group list-group-flush">
+                      <li class="list-group-item"  
+                      *ngFor="let sc of shoppingCartCollection">{{sc.title}}, Qty:{{ sc.quantity }}</li>
+                      <li class="list-group-item" *ngIf="!shoppingCartCollection?.length > 0">Empty</li>
+                      <li class="list-group-item" *ngIf="shoppingCartCollection?.length > 0">Total Price {{ getTotalCartPriceShoppingCartCollection() | currency:'GBP' }}</li>
+                  </div>
+                  <button (click)="checkout(model)" *ngIf="shoppingCartCollection?.length" class="btn btn-primary btn-block" routerLink="shopping-cart">Checkout</button>
+                </div>
+          </ng-template>
+  </div>
+  <div class="col">
+    <div class="row">
+        <ng-container *ngFor="let p of filteredProducts; let i = index">
+          <div class="col">
+            <product-card (onRemoveProduct)="onRemoveProduct($event)" (onAddProduct)="onAddProduct($event)" [product]="p" [shoppingCart]="shoppingCartCollection && order$?.product"></product-card>
+          </div>
+          <div *ngIf="(i + 1) % 2 === 0" class="w-100"></div>
+        </ng-container>
       </div>
-      <div *ngIf="(i + 1) % 2 === 0" class="w-100"></div>
-  </ng-container>
+  </div>
 </div>
+
 

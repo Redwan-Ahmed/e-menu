@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AdminAuthGuard } from './admin-auth-guard.service';
+import { ShoppingCartService } from './shopping-cart.service';
 
-describe('AdminAuthGuardService', () => {
+describe('ShoppingCartService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: AdminAuthGuard = TestBed.get(AdminAuthGuard);
+    const service: ShoppingCartService = TestBed.get(ShoppingCartService);
     expect(service).toBeTruthy();
   });
 });

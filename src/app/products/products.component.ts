@@ -24,7 +24,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   modelUpdate: Order;
   order$: Order;
   orderSize: any;
-
+//
   constructor(
     route: ActivatedRoute,
     productService: ProductService,

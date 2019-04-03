@@ -8,4 +8,5 @@ export interface Product {
     imageUrl?: string;
     id?: any;
     quantity?: number;
+    prepTime?: number;
 }

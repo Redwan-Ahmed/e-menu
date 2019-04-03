@@ -1,7 +1,8 @@
 
 .sticky-top {
     top: 350px;
-    position: fixed;
+    /* position: fixed; */
+    text-align: center;
 }
 
 .sticky-top button{

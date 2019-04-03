@@ -1,7 +1,6 @@
 import { ShoppingCartService } from './../shopping-cart.service';
 import { Product } from './../models/product';
 import { Component, OnInit, Input, Output, OnChanges, SimpleChanges } from '@angular/core';
-import { ShoppingCart } from '../models/shopping-cart';
 import { EventEmitter } from '@angular/core';
 import * as _ from 'lodash';
 
@@ -23,7 +22,8 @@ export class ProductCardComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.shoppingCart) {
-      let currentProduct = _.find(this.shoppingCart, (o) => { return o.id === this.product.id; });      
+      let currentProduct = _.find(this.shoppingCart, (o) => { return o.id === this.product.id; });
+      console.log("currentProduct", currentProduct);
       if (currentProduct) {
         this.quantity = currentProduct.quantity;
       } else {
@@ -40,13 +40,5 @@ export class ProductCardComponent implements OnInit, OnChanges {
   removeFromCart(product: Product) {
     this.onRemoveProduct.emit(product);
   }
-
-  // getQuantity() {
-  //   if (!this.shoppingCart) return 0;
-
-  //   let item = this.shoppingCart.items[this.product.key];
-  //   return item ? item.quantity : 0;
-  // }
-
 
 }

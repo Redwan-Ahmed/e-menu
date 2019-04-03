@@ -1,7 +1,7 @@
 import { Order } from './../models/order';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ShoppingCartService } from '../shopping-cart.service';
-import { Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -10,25 +10,27 @@ import { Subscription } from 'rxjs';
 })
 export class ShoppingCartComponent implements OnInit, OnDestroy{
 
-  subscription: Subscription;
-  order$: Order;
+  order$: any;
+  id: string;
   
   constructor(
-    private cartService: ShoppingCartService
-  ) { }
+    private cartService: ShoppingCartService,
+    private route: ActivatedRoute
 
-  ngOnInit() {
-    /** This is to get the Cart from Firestore*/
-    let orderIdStorage = localStorage.getItem('orderId');
-    if (orderIdStorage != null) {
-      this.subscription = this.cartService.getSubcollection().subscribe(order => {
-        console.log('ShoppingCartComponent. ngOnInit().getSubcollection()', order);
+  ) { 
+    this.id = this.route.snapshot.paramMap.get('id');
+    console.log("this.id", this.id);
 
-        this.order$ = order[0];
-        console.log("ShoppingCartComponent.this.order$.product ", this.order$.product);
+    //take operator allows me to take one object and no need to unsubscirbe
+    if (this.id) this.cartService.getOrderDoc(this.id).take(1).subscribe(order => { 
+      this.order$ = order.order; 
+      console.log('1', this.id);
+      console.log('2', this.order$);
       });
-    }    
+    
   }
+
+  ngOnInit() { }
 
   totalQuantity(count: number) {
     count = 0;
@@ -48,8 +50,6 @@ export class ShoppingCartComponent implements OnInit, OnDestroy{
   }
 
   ngOnDestroy() {
-    //unsubscribing breaks code
-    //this.subscription.unsubscribe();
   }
 
 }

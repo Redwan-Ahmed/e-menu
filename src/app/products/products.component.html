@@ -8,7 +8,7 @@
       <div class="list-group list-group-flush">
         <li class="list-group-item" *ngFor="let sc of shoppingCartCollection">{{sc.title}} x {{ sc.quantity }}</li>
         <li class="list-group-item" *ngIf="!shoppingCartCollection?.length > 0">Empty</li>
-        <li class="list-group-item" *ngIf="shoppingCartCollection?.length > 0">Total Price 
+        <li class="list-group-item font-weight-bold" *ngIf="shoppingCartCollection?.length > 0">Total Price 
           {{ getTotalCartPriceShoppingCartCollection() | currency:'GBP' }}</li>
       </div>
       <button (click)="checkout(model)" *ngIf="shoppingCartCollection?.length" class="btn btn-primary btn-block">Checkout</button>

@@ -62,10 +62,10 @@ import { ProductCardComponent } from './product-card/product-card.component';
     RouterModule.forRoot([
       { path: '', component: ProductsComponent },
       { path: 'products', component: ProductsComponent },
-      { path: 'shopping-cart', component: ShoppingCartComponent },
+      { path: 'shopping-cart/:id', component: ShoppingCartComponent },
       { path: 'login', component: LoginComponent },
 
-      { path: 'check-out', component: CheckOutComponent, canActivate: [AuthGuard] },
+      { path: 'check-out"', component: CheckOutComponent, canActivate: [AuthGuard] },
       { path: 'order-success', component: OrderSuccessComponent, canActivate: [AuthGuard] },
       { path: 'my/orders', component: MyOrderComponent, canActivate: [AuthGuard] },
       

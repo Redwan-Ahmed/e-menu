@@ -6,6 +6,13 @@
     padding: 0;
 }
 
+/* the button now has a click cursor */
 .card-footer button {
     cursor: pointer;
+}
+
+/* this makes the quanitity displayed centred vertically */
+.col {
+    height: 37px;
+    line-height: 37px;
 }

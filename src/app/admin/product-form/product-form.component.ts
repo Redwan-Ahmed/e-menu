@@ -1,8 +1,8 @@
 import { ActivatedRoute } from '@angular/router';
 import { Category } from './../../models/category';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { CategoryService } from './../../category.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { ProductService } from 'src/app/product.service';
 import { Product } from './../../models/product';
 import { Router } from '@angular/router';
@@ -20,7 +20,8 @@ export class ProductFormComponent implements OnDestroy{
     title: '',
     price: null,
     category: '',
-    imageUrl: ''
+    imageUrl: '',
+    prepTime: null
   }
 
   cat: Category[];
@@ -50,7 +51,7 @@ export class ProductFormComponent implements OnDestroy{
   }
 
   save (){
-    if(this.product.title != '' && this.product.price != null && this.product.category != '' && this.product.imageUrl != ''){
+    if(this.product.title != '' && this.product.price != null && this.product.category != '' && this.product.imageUrl != '' && this.product.prepTime != null){
       //edit or update function in the service
       if(this.id) this.productService.updateProduct(this.id, this.product);
       //create function in the service
@@ -62,6 +63,7 @@ export class ProductFormComponent implements OnDestroy{
       this.product.price = null;
       this.product.category = '';
       this.product.imageUrl = '';
+      this.product.prepTime = null;
 
       this.router.navigate(['/admin/products']);
     }

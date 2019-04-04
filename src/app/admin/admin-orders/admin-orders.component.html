@@ -1,38 +1,69 @@
 <h1>Order Management</h1>
 <div class="firstRow">
   <h3>Processing Orders</h3>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Order ID</th>
-        <th>Status</th>
-        <th>Cart</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="o.orders" *ngFor="let o of orders$">
-        <td>{{ o.id }}</td>
-        <td>{{ o.order.status }}</td>
-        <td>
-          <table>
-            <tr>
-              <th>Product Title</th>
-              <th>Quantity<th>
-            </tr>
-            <tr *ngFor="let orderProduct of o.order.product">
-              <td>{{orderProduct.title}}</td>
-              <td>{{orderProduct.quantity}}</td>
-            </tr>
-          </table>
-        </td>
-        <td>
-          <button (click)="start(o.id)" class="btn btn-primary btn-block">Start Order</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <ng-container *ngFor="let o of orders$">
+    <table class="table" *ngIf="o.order.status ==='processing'">
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Status</th>
+          <th>Cart</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ o.id }}</td>
+          <td>{{ o.order.status }}</td>
+          <td>
+            <table>
+              <tr>
+                <th>Product Title</th>
+                <th>Quantity<th>
+              </tr>
+              <tr *ngFor="let orderProduct of o.order.product">
+                <td>{{orderProduct.title}}</td>
+                <td>{{orderProduct.quantity}}</td>
+              </tr>
+            </table>
+          </td>
+          <td>
+            <button (click)="start(o.id)" class="btn btn-primary btn-block">Start Order</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-container>
 </div>
 <div class="secondRow">
   <h3>Active Orders</h3>
+  <ng-container *ngFor="let o of orders$">
+    <table class="table" *ngIf="o.order.status === 'active'">
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Status</th>
+          <th>Cart</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ o.id }}</td>
+          <td>{{ o.order.status }}</td>
+          <td>
+            <table>
+              <tr>
+                <th>Product Title</th>
+                <th>Quantity<th>
+              </tr>
+              <tr *ngFor="let orderProduct of o.order.product">
+                <td>{{orderProduct.title}}</td>
+                <td>{{orderProduct.quantity}}</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-container>
 </div>

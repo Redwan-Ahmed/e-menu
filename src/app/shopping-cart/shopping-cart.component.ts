@@ -1,7 +1,7 @@
 import { Order } from './../models/order';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ShoppingCartService } from '../shopping-cart.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -15,8 +15,8 @@ export class ShoppingCartComponent implements OnInit, OnDestroy{
   
   constructor(
     private cartService: ShoppingCartService,
-    private route: ActivatedRoute
-
+    private route: ActivatedRoute,
+    private router: Router
   ) { 
     this.id = this.route.snapshot.paramMap.get('id');
     console.log("this.id", this.id);
@@ -47,6 +47,11 @@ export class ShoppingCartComponent implements OnInit, OnDestroy{
     const totalCartPrice = sum.reduce((totalCartPrice, sum) => totalCartPrice + sum, 0);
     console.log('totalCartPrice', totalCartPrice);
     return totalCartPrice;
+  }
+
+  payment(){
+    this.router.navigate(['/check-out/' + this.id]);
+    console.log("The order has been paid!");
   }
 
   ngOnDestroy() {

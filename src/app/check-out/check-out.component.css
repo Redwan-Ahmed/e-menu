@@ -1,0 +1,12 @@
+h1 {text-align:center;}
+h4 {text-align:center;}
+
+.card#first { 
+    position: relative;
+    top: 20px;
+}
+
+.card#second {
+    position: relative;
+    top: 150px;
+}

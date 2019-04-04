@@ -65,7 +65,7 @@ import { ProductCardComponent } from './product-card/product-card.component';
       { path: 'shopping-cart/:id', component: ShoppingCartComponent },
       { path: 'login', component: LoginComponent },
 
-      { path: 'check-out"', component: CheckOutComponent, canActivate: [AuthGuard] },
+      { path: 'check-out/:id', component: CheckOutComponent },
       { path: 'order-success', component: OrderSuccessComponent, canActivate: [AuthGuard] },
       { path: 'my/orders', component: MyOrderComponent, canActivate: [AuthGuard] },
       

@@ -1,7 +1,22 @@
 
+/* 
+This style creates a thumbnail of the images of each product in the cart
+Source: https://www.udemy.com/the-complete-angular-master-class/learn/v4/t/lecture/7860018?start=1 
+Session: 23, Lecture: 348 
+*/
 .thumbnail{
     width: 80px;
     height: 80px;
     border-radius: 100%;
     background-size: cover;
+}
+
+/* This style sets the position for the div class "button" which sets the button to the right */
+.button {
+    position: relative;
+    left: 700px;
+}
+/* This style sets a gap between the 2 buttons (cash and card) */
+.button .btn {
+    margin-right: 30px;
 }

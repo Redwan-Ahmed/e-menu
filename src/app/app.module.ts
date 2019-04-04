@@ -32,6 +32,7 @@ import { ProductFormComponent } from './admin/product-form/product-form.componen
 import { ProductService } from './product.service';
 import { ProductsFilterComponent } from './products/products-filter/products-filter.component';
 import { ProductCardComponent } from './product-card/product-card.component';
+import { OrderService } from './order.service';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ import { ProductCardComponent } from './product-card/product-card.component';
     UserService,
     CategoryService,
     ProductService,
-    ShoppingCartService
+    ShoppingCartService,
+    OrderService
   ],
   bootstrap: [AppComponent]
 })

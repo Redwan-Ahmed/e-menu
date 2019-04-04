@@ -1,9 +1,37 @@
 import { Injectable } from '@angular/core';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { Subscription, Observable } from 'rxjs';
+import { Order } from './models/order';
+import 'rxjs/add/operator/map'
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
 
-  constructor() { }
+  orderCollection: AngularFirestoreCollection<Order>;
+  orders: Observable<Order[]>;
+
+  orderDoc: AngularFirestoreDocument<Order>;
+  ordDoc: Observable<any>;
+
+
+  constructor(private db: AngularFirestore) {
+    this.orderCollection = this.db.collection('orders');
+   }
+
+   getAllOrders() {
+    let orders = this.orderCollection.snapshotChanges().pipe(
+      map(changes => changes.map(a => {
+        const data = a.payload.doc.data() as Order;
+        const id = a.payload.doc.id;
+        return { id, ...data }
+      })))
+
+    return orders;
+  }
+
+
+
 }

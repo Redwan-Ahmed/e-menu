@@ -1,6 +1,39 @@
 <h1>Order Management</h1>
 <div class="firstRow">
   <h3>Processing Orders</h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Order ID</th>
+        <th>Status</th>
+        <th>Cart</th>
+        <th>Total Price</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let o of orders$">
+        <td>{{ o.id }}</td>
+        <td>{{ o.order.status }}</td>
+        <td>
+          <table>
+            <tr>
+              <th>Product Title</th>
+              <th>Quantity<th>
+            </tr>
+            <tr *ngFor="let orderProduct of o.order.product">
+              <td>{{orderProduct.title}}</td>
+              <td>{{orderProduct.quantity}}</td>
+            </tr>
+          </table>
+        </td>
+        <td></td>
+        <td>
+          <a>Start Order</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 <div class="secondRow">
   <h3>Active Orders</h3>

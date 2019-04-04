@@ -13,7 +13,7 @@ export class OrderService {
   orderCollection: AngularFirestoreCollection<Order>;
   orders: Observable<Order[]>;
 
-  orderDoc: AngularFirestoreDocument<Order>;
+  orderDoc: AngularFirestoreDocument<any>;
   ordDoc: Observable<any>;
 
 
@@ -32,6 +32,9 @@ export class OrderService {
     return orders;
   }
 
-
+  startOrder(orderId){
+    this.orderDoc = this.db.doc<any>('orders/' + orderId);
+    this.orderDoc.update({"order.status": "active"});
+  }
 
 }

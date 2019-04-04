@@ -7,12 +7,11 @@
         <th>Order ID</th>
         <th>Status</th>
         <th>Cart</th>
-        <th>Total Price</th>
         <th></th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let o of orders$">
+      <tr class="o.orders" *ngFor="let o of orders$">
         <td>{{ o.id }}</td>
         <td>{{ o.order.status }}</td>
         <td>
@@ -27,9 +26,8 @@
             </tr>
           </table>
         </td>
-        <td></td>
         <td>
-          <a>Start Order</a>
+          <button (click)="start(o.id)" class="btn btn-primary btn-block">Start Order</button>
         </td>
       </tr>
     </tbody>

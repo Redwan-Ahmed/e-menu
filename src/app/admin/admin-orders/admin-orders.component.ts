@@ -12,6 +12,7 @@ export class AdminOrdersComponent implements OnInit, OnDestroy {
 
   orders$: any;
   orderSubscription: Subscription;
+  model: Order;
 
   constructor(private orderService: OrderService) { }
 
@@ -22,18 +23,12 @@ export class AdminOrdersComponent implements OnInit, OnDestroy {
   getAllOrders() {
     this.orderSubscription = this.orderService.getAllOrders().subscribe(orders => {
       this.orders$ = orders;
-      console.log(orders);
+      console.log();
     });
   }
 
-  getTotalCartPrice() {
-    // let sum;
-    // sum = this.orders$.product.map(a => a.price * a.quantity)
-    // console.log('total', this.orders$);
-    
-    // const totalCartPrice = sum.reduce((totalCartPrice, sum) => totalCartPrice + sum, 0);
-    // console.log('totalCartPrice', totalCartPrice);
-    // return totalCartPrice;
+  start(id){
+    this.orderService.startOrder(id);
   }
 
   ngOnDestroy() {

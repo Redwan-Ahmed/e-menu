@@ -1,51 +1,188 @@
 <h1>Predictive Ordering</h1>
 <!-- Source for HTML is from Bootstrap (Custom forms -> Custom Select): https://getbootstrap.com/docs/4.3/components/input-group/ -->
 <div class="input-group mb-3 input-group-lg">
-    <div class="input-group-prepend">
-      <label class="input-group-text" for="inputGroupSelect01">Select a Day</label>
-    </div>
-    <select class="custom-select" id="inputGroupSelect01">
-      <option value="Monday">Monday</option>
-      <option value="Tuesday">Tuesday</option>
-      <option value="Wednesday">Wednesday</option>
-      <option value="Thursday">Thursday</option>
-      <option value="Friday">Friday</option>
-      <option value="Saturday">Saturday</option>
-      <option value="Sunday">Sunday</option>
-    </select>
-    <div class="input-group-append">
-        <button (click)="filterDay()" class="btn btn-outline-primary" type="button">Submit</button>
-      </div>
+  <div class="input-group-prepend">
+    <label class="input-group-text" for="inputGroupSelect01">Select a Day</label>
   </div>
-  <div>
-      <h3>Orders</h3>
-      <ng-container *ngFor="let o of orders$">
-        <table class="table" *ngIf="o.order.day === selectedDay">
-          <thead>
-            <tr>
-              <th>Order ID</th>
-              <th>Status</th>
-              <th>Cart</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{{ o.id }}</td>
-              <td>{{ o.order.status }}</td>
-              <td>
-                <table>
-                  <tr>
-                    <th>Product Title</th>
-                    <th>Quantity<th>
-                  </tr>
-                  <tr *ngFor="let orderProduct of o.order.product">
-                    <td>{{orderProduct.title}}</td>
-                    <td>{{orderProduct.quantity}}</td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </ng-container>
-    </div>
+  <select class="custom-select" id="inputGroupSelect01">
+    <option value="Monday">Monday</option>
+    <option value="Tuesday">Tuesday</option>
+    <option value="Wednesday">Wednesday</option>
+    <option value="Thursday">Thursday</option>
+    <option value="Friday">Friday</option>
+    <option value="Saturday">Saturday</option>
+    <option value="Sunday">Sunday</option>
+  </select>
+  <div class="input-group-append">
+    <button (click)="filterDay()" class="btn btn-outline-primary" type="button">Submit</button>
+  </div>
+</div>
+<div *ngIf="selectedDay === 'Monday'">
+  <h3>Orders</h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Qty</th>
+        <th>img</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of monday">
+        <td>{{ product.name }}</td>
+        <td>
+          {{product.qty}}
+        </td>
+        <td>
+          <img [src]="product.img">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div *ngIf="selectedDay === 'Tuesday'">
+  <h3>Orders</h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Qty</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of tuesday">
+        <td>{{ product.name }}</td>
+        <td>
+          {{product.qty}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div *ngIf="selectedDay === 'Wednesdsy'">
+  <h3>Orders</h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Qty</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of wednesday">
+        <td>{{ product.name }}</td>
+        <td>
+          {{product.qty}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div *ngIf="selectedDay === 'Thursday'">
+  <h3>Orders</h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Qty</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of thursday">
+        <td>{{ product.name }}</td>
+        <td>
+          {{product.qty}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div *ngIf="selectedDay === 'Friday'">
+  <h3>Orders</h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Qty</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of friday">
+        <td>{{ product.name }}</td>
+        <td>
+          {{product.qty}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div *ngIf="selectedDay === 'Saturday'">
+  <h3>Orders</h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Qty</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of saturday">
+        <td>{{ product.name }}</td>
+        <td>
+          {{product.qty}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div *ngIf="selectedDay === 'Sunday'">
+  <h3>Orders</h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Qty</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of sunday">
+        <td>{{ product.name }}</td>
+        <td>
+          {{product.qty}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div>
+  <h3>Orders</h3>
+  <ng-container *ngFor="let o of orders$">
+    <table class="table" *ngIf="o.order.day === selectedDay">
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Status</th>
+          <th>Cart</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ o.id }}</td>
+          <td>{{ o.order.status }}</td>
+          <td>
+            <table>
+              <tr>
+                <th>Product Title</th>
+                <th>Quantity<th>
+              </tr>
+              <tr *ngFor="let orderProduct of o.order.product">
+                <td>{{orderProduct.title}}</td>
+                <td>{{orderProduct.quantity}}</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-container>
+</div>

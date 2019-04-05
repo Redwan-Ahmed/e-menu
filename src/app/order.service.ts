@@ -13,6 +13,8 @@ export class OrderService {
   orderCollection: AngularFirestoreCollection<Order>;
   orders: Observable<Order[]>;
 
+  filterCollection: AngularFirestoreCollection<Order>;
+
   orderDoc: AngularFirestoreDocument<any>;
   ordDoc: Observable<any>;
 
@@ -35,6 +37,11 @@ export class OrderService {
   startOrder(orderId){
     this.orderDoc = this.db.doc<any>('orders/' + orderId);
     this.orderDoc.update({"order.status": "active"});
+  }
+
+  filterByDay(){
+    this.filterCollection = this.db.collection('orders/', ref => ref.where('order.day', '==', 'Monday'));
+    console.log(this.filterCollection);
   }
 
 }

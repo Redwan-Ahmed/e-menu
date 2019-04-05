@@ -5,7 +5,6 @@
       <label class="input-group-text" for="inputGroupSelect01">Select a Day</label>
     </div>
     <select class="custom-select" id="inputGroupSelect01">
-      <option selected >Choose...</option>
       <option value="Monday">Monday</option>
       <option value="Tuesday">Tuesday</option>
       <option value="Wednesday">Wednesday</option>
@@ -18,3 +17,35 @@
         <button (click)="filterDay()" class="btn btn-outline-primary" type="button">Submit</button>
       </div>
   </div>
+  <div>
+      <h3>Orders</h3>
+      <ng-container *ngFor="let o of orders$">
+        <table class="table" *ngIf="o.order.day === selectedDay">
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Status</th>
+              <th>Cart</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{ o.id }}</td>
+              <td>{{ o.order.status }}</td>
+              <td>
+                <table>
+                  <tr>
+                    <th>Product Title</th>
+                    <th>Quantity<th>
+                  </tr>
+                  <tr *ngFor="let orderProduct of o.order.product">
+                    <td>{{orderProduct.title}}</td>
+                    <td>{{orderProduct.quantity}}</td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </ng-container>
+    </div>

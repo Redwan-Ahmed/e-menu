@@ -12,7 +12,6 @@ export class AdminOrdersComponent implements OnInit, OnDestroy {
 
   orders$: any;
   orderSubscription: Subscription;
-  model: Order;
 
   constructor(private orderService: OrderService) { }
 

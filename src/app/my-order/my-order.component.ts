@@ -12,4 +12,12 @@ export class MyOrderComponent implements OnInit {
   ngOnInit() {
   }
 
+  filterDay(){
+    // let e = document.getElementById("inputGroupSelect01");
+    // var value = e.options[e.selectedIndex].value;
+    const inputElement: HTMLInputElement = document.getElementById("inputGroupSelect01") as HTMLInputElement;
+    const inputValue: string = inputElement.value;
+    console.log(inputValue);
+  }
+
 }

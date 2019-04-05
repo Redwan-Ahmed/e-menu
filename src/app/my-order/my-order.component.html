@@ -1,3 +1,20 @@
-<p>
-  my-order works!
-</p>
+<h1>Predictive Ordering</h1>
+<!-- Source for HTML is from Bootstrap (Custom forms -> Custom Select): https://getbootstrap.com/docs/4.3/components/input-group/ -->
+<div class="input-group mb-3 input-group-lg">
+    <div class="input-group-prepend">
+      <label class="input-group-text" for="inputGroupSelect01">Select a Day</label>
+    </div>
+    <select class="custom-select" id="inputGroupSelect01">
+      <option selected >Choose...</option>
+      <option value="Monday">Monday</option>
+      <option value="Tuesday">Tuesday</option>
+      <option value="Wednesday">Wednesday</option>
+      <option value="Thursday">Thursday</option>
+      <option value="Friday">Friday</option>
+      <option value="Saturday">Saturday</option>
+      <option value="Sunday">Sunday</option>
+    </select>
+    <div class="input-group-append">
+        <button (click)="filterDay()" class="btn btn-outline-primary" type="button">Submit</button>
+      </div>
+  </div>

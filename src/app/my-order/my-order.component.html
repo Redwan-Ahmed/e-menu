@@ -17,40 +17,47 @@
     <button (click)="filterDay()" class="btn btn-outline-primary" type="button">Submit</button>
   </div>
 </div>
+<div>
+    <p style="text-align: center; font-style: italic">Please click submit after selecting a day</p>
+</div>
 <div *ngIf="selectedDay === 'Monday'">
-  <h3>Orders</h3>
+  <h3>The Most Popular Product Ordered on {{ selectedDay }}</h3>
   <table class="table">
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Qty</th>
-        <th>img</th>
+        <th></th>
+        <th>Product Title</th>
+        <th>Product Quantity Ordered</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody id="firstRow">
       <tr *ngFor="let product of monday">
+        <td>
+          <div [style.backgroundImage]="'url(' + product.img + ')'" class="thumbnail"></div>
+        </td>
         <td>{{ product.name }}</td>
         <td>
           {{product.qty}}
-        </td>
-        <td>
-          <img [src]="product.img">
         </td>
       </tr>
     </tbody>
   </table>
 </div>
 <div *ngIf="selectedDay === 'Tuesday'">
-  <h3>Orders</h3>
+  <h3>The Most Popular Product Ordered on {{ selectedDay }}</h3>
   <table class="table">
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Qty</th>
+        <th></th>
+        <th>Product Title</th>
+        <th>Product Quantity Ordered</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody id="firstRow">
       <tr *ngFor="let product of tuesday">
+        <td>
+          <div [style.backgroundImage]="'url(' + product.img + ')'" class="thumbnail"></div>
+        </td>
         <td>{{ product.name }}</td>
         <td>
           {{product.qty}}
@@ -59,17 +66,21 @@
     </tbody>
   </table>
 </div>
-<div *ngIf="selectedDay === 'Wednesdsy'">
-  <h3>Orders</h3>
+<div *ngIf="selectedDay === 'Wednesday'">
+  <h3>The Most Popular Product Ordered on {{ selectedDay }}</h3>
   <table class="table">
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Qty</th>
+        <th></th>
+        <th>Product Title</th>
+        <th>Product Quantity Ordered</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody id="firstRow">
       <tr *ngFor="let product of wednesday">
+        <td>
+          <div [style.backgroundImage]="'url(' + product.img + ')'" class="thumbnail"></div>
+        </td>
         <td>{{ product.name }}</td>
         <td>
           {{product.qty}}
@@ -79,16 +90,20 @@
   </table>
 </div>
 <div *ngIf="selectedDay === 'Thursday'">
-  <h3>Orders</h3>
+  <h3>The Most Popular Product Ordered on {{ selectedDay }}</h3>
   <table class="table">
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Qty</th>
+        <th></th>
+        <th>Product Title</th>
+        <th>Product Quantity Ordered</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody id="firstRow">
       <tr *ngFor="let product of thursday">
+        <td>
+          <div [style.backgroundImage]="'url(' + product.img + ')'" class="thumbnail"></div>
+        </td>
         <td>{{ product.name }}</td>
         <td>
           {{product.qty}}
@@ -98,16 +113,20 @@
   </table>
 </div>
 <div *ngIf="selectedDay === 'Friday'">
-  <h3>Orders</h3>
+  <h3>The Most Popular Product Ordered on {{ selectedDay }}</h3>
   <table class="table">
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Qty</th>
+        <th></th>
+        <th>Product Title</th>
+        <th>Product Quantity Ordered</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody id="firstRow">
       <tr *ngFor="let product of friday">
+        <td>
+          <div [style.backgroundImage]="'url(' + product.img + ')'" class="thumbnail"></div>
+        </td>
         <td>{{ product.name }}</td>
         <td>
           {{product.qty}}
@@ -117,16 +136,20 @@
   </table>
 </div>
 <div *ngIf="selectedDay === 'Saturday'">
-  <h3>Orders</h3>
+  <h3>The Most Popular Product Ordered on {{ selectedDay }}</h3>
   <table class="table">
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Qty</th>
+        <th></th>
+        <th>Product Title</th>
+        <th>Product Quantity Ordered</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody id="firstRow">
       <tr *ngFor="let product of saturday">
+        <td>
+          <div [style.backgroundImage]="'url(' + product.img + ')'" class="thumbnail"></div>
+        </td>
         <td>{{ product.name }}</td>
         <td>
           {{product.qty}}
@@ -136,16 +159,20 @@
   </table>
 </div>
 <div *ngIf="selectedDay === 'Sunday'">
-  <h3>Orders</h3>
+  <h3>The Most Popular Product Ordered on {{ selectedDay }}</h3>
   <table class="table">
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Qty</th>
+        <th></th>
+        <th>Product Title</th>
+        <th>Product Quantity Ordered</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody id="firstRow">
       <tr *ngFor="let product of sunday">
+        <td>
+          <div [style.backgroundImage]="'url(' + product.img + ')'" class="thumbnail"></div>
+        </td>
         <td>{{ product.name }}</td>
         <td>
           {{product.qty}}
@@ -155,7 +182,7 @@
   </table>
 </div>
 <div>
-  <h3>Orders</h3>
+  <h3>Order History for {{ selectedDay }}</h3>
   <ng-container *ngFor="let o of orders$">
     <table class="table" *ngIf="o.order.day === selectedDay">
       <thead>

@@ -80,6 +80,9 @@ export class MyOrderComponent implements OnInit, OnDestroy {
   }
 
   mergeSameValueArrays(array) {
+    /** First attempt on merging the 2 arrays, did not work but gave me a starting point to look for a solution
+     * Source: https://stackoverflow.com/questions/24076487/combining-javascript-objects-in-an-array-with-same-key-value (StackOverflow)
+     */
     // _.map(_.groupBy(array, "name"), (vals, name) => {
     //   return _.reduce(vals, (m, o) => {
     //     for (var p in o)
@@ -88,7 +91,17 @@ export class MyOrderComponent implements OnInit, OnDestroy {
     //     return m;
     //   }, { name: name });
     // });
+
+    /** declare an empty array to store the filtered products 
+     * (products are filtered via passing through the parameter 
+     * e.g. Monday array is passed thorugh thus only monday products are in array)*/
     let tempArray = [];
+    //declared an sorted array to filter the tempArray (qty in descending order)
+    let sorted = [];
+    /** using Loadash to group the products in the array(array passed in the parameter)
+     * now the groupedProducts will group the array like this ["name": Steak, "qty": 1]
+     * line 111: this stores each element in the recursive algorithm, and if that element exists then add the qty of that element to that qty in the array.
+    */
     let groupedProducts = _.groupBy(array, "name");
     Object.keys(groupedProducts).forEach((key) => {
       let product = { name: key, qty: 0 };
@@ -96,15 +109,35 @@ export class MyOrderComponent implements OnInit, OnDestroy {
       groupedProducts[key].forEach(element => {
         qty = qty + element.qty;
       });
-      tempArray.push({ name: key, qty: qty, img: groupedProducts[key][0].img})
+      // the temp array now stores all the products name and qty of the array (passed thorugh parameter)
+      // the temp array will look like this ["name": Steak, "qty": 1, "name": Coke, "qty": 5, "name": Ice Cream, "qty": 3]
+      tempArray.push({ name: key, qty: qty, img: groupedProducts[key][0].img});
+      console.log('temp Array', tempArray);
+      /** now the temp array needs to be sorted in the highest qty (most popular product) being displayed first (head of the alogirhtm)
+       * and the lowest qty (least popular product) at the tail of the array
+       * this was done by using the orderBy function in Loadash; I then specified "['desc']" to make the qty in decending order 
+       * Source 1: https://stackoverflow.com/questions/51088104/lodash-orderby-gives-typeerror-t-is-not-a-function-after-minification (StackOverflow)
+       * Source 2: https://stackoverflow.com/questions/22928841/lodash-multi-column-sortby-descending (StackOverflow) */
+
+      sorted = _.orderBy(tempArray, [(data) => data.qty], ['desc']);
+      console.log('sorted', sorted);
+      
+      /** This was my first attempt in trying to sort the temp array in decending order based on the qty
+       *  This did not work due to updates in the Loadash Library, to sort by decending order there is a new function called OrderBy
+       * Source: https://lodash.com/docs/4.17.11#sortBy (Loadash Library Docs)
+       */
+      // _.sortby(tempArray, [function(o) {return o.name}]);
+      // _.sortby(tempArray, ['name', 'qty']);
     });
-    return tempArray;
+    return sorted;
 
   }
 
   filterDay() {
     /**
-     * Was able to get the value of the selecter by looking into HTMLInputElement
+     * Was able to get the value of the selecter by looking into HTMLInputElement;
+     * which gets the option value in the HTML Selector field and stores it as a string
+     * therefore allows me to check what day the user is selecting
      * Source: https://stackoverflow.com/questions/12989741/the-property-value-does-not-exist-on-value-of-type-htmlelement
      */
     const inputElement: HTMLInputElement = document.getElementById("inputGroupSelect01") as HTMLInputElement;

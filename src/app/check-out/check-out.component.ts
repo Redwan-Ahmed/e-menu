@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/co
 import { ShoppingCartService } from '../shopping-cart.service';
 import { ActivatedRoute } from '@angular/router';
 import * as $ from "jquery";
+import { OrderService } from '../order.service';
 
 @Component({
   selector: 'app-check-out',
@@ -24,17 +25,18 @@ export class CheckOutComponent implements OnInit {
     private cartService: ShoppingCartService,
     private route: ActivatedRoute,
     private db: AngularFirestore,
-    private renderer: Renderer2
-
+    private renderer: Renderer2,
+    private orderService: OrderService
   ) {
     this.id = this.route.snapshot.paramMap.get('id');
     console.log("this.id", this.id);
 
-    //take operator allows me to take one object and no need to unsubscirbe
+    //This is the main logic for the preperation time algorithm
     if (this.id) this.cartService.getOrderDoc(this.id).subscribe(order => {
       this.order$ = order.order;
       console.log('1', this.id);
       console.log('2', this.order$);
+      //only start the algorithm when the order is active (admin has started the order)
       if (this.order$.status === 'active') {
         var i = 0
         var counterBack = setInterval(() => {
@@ -43,11 +45,10 @@ export class CheckOutComponent implements OnInit {
             let precentage = (i / this.prepTimeCalculation) * 100;
             this.renderer.setStyle(this.progressBar.nativeElement, 'width', precentage + '%');
             console.log("i", i + '%');
-
-            // $('.progress-bar').css('width', i+'%');
           } else {
             // completion logic
             clearInterval(counterBack);
+            this.orderService.completeOrder(this.id);
           }
         }, 1000);
       }

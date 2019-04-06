@@ -39,6 +39,11 @@ export class OrderService {
     this.orderDoc.update({"order.status": "active"});
   }
 
+  completeOrder(orderId){
+    this.orderDoc = this.db.doc<any>('orders/' + orderId);
+    this.orderDoc.update({"order.status": "completed"});
+  }
+
   filterByDay(){
     this.filterCollection = this.db.collection('orders/', ref => ref.where('order.day', '==', 'Monday'));
     console.log(this.filterCollection);

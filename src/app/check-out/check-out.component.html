@@ -35,7 +35,9 @@
             <span class="sr-only"></span>
           </div>
         </div>
-        <p class="card-text" style="font-size: small; font-style: italic;">Coming up in {{ this.prepTimeCalculation }} minutes </p>
+        <p class="card-text" *ngIf="orderStatus === 'active'" style="font-size: small; font-style: italic;">Order has been started! Coming up in {{ this.prepTimeCalculation }} minutes </p>
+        <p class="card-text" *ngIf="orderStatus === 'processing'" style="font-size: small; font-style: italic;">Waiting for the Chef to start this order </p>
+        <p class="card-text" *ngIf="orderStatus === 'completed'" style="font-size: small; font-style: italic;">Few seconds away...The Chef just has to plate up and garnish your dish</p>
       </div>
     </div>
   </div>

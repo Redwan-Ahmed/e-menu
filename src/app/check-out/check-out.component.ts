@@ -14,6 +14,7 @@ export class CheckOutComponent implements OnInit {
 
   order$: any;
   id: string;
+  orderStatus: any;
 
   listTemp: any[] = [];
   prepTimeSum: number;
@@ -36,6 +37,8 @@ export class CheckOutComponent implements OnInit {
       this.order$ = order.order;
       console.log('1', this.id);
       console.log('2', this.order$);
+      this.orderStatus = this.order$.status;
+      console.log('Order Status', this.orderStatus);
       //only start the algorithm when the order is active (admin has started the order)
       if (this.order$.status === 'active') {
         var i = 0
@@ -53,6 +56,7 @@ export class CheckOutComponent implements OnInit {
         }, 1000);
       }
     });
+    
 
     // /* Allows me to count the status of an order in my whole orders collection*/
     // const totalProcessingOrders = this.db.collection('orders', ref => 
@@ -71,7 +75,6 @@ export class CheckOutComponent implements OnInit {
     // }).catch(err => {
     //   console.log('Error getting documents', err);
     // });
-
   }
 
   totalQuantity(count: number) {
@@ -143,11 +146,11 @@ export class CheckOutComponent implements OnInit {
         list.push(data);
       });
       this.listTemp = list;
-      let otherOrderPreTime = 0;
+      let otherOrderPrepTime = 0;
       list.forEach(order => {
         order.order.product.forEach(product => {
           let time = product.prepTime * product.quantity;
-          otherOrderPreTime = otherOrderPreTime + time;
+          otherOrderPrepTime = otherOrderPrepTime + time;
         });
       });
       // console.log('list', this.listTemp);
@@ -155,7 +158,7 @@ export class CheckOutComponent implements OnInit {
       // console.log('status count', this.statusCount);
       this.prepTimeSum = this.getTotalPrepTime();
       console.log("PrepSum", this.prepTimeSum);
-      this.prepTimeCalculation = otherOrderPreTime + this.prepTimeSum;
+      this.prepTimeCalculation = otherOrderPrepTime + this.prepTimeSum;
       console.log("Calculation", this.prepTimeCalculation);
 
       /**

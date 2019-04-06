@@ -48,9 +48,5 @@ export class OrderService {
     this.filterCollection = this.db.collection('orders/', ref => ref.where('order.day', '==', 'Monday'));
     console.log(this.filterCollection);
   }
-
-  getOrderStatus(){
-    
-  }
-
+  
 }

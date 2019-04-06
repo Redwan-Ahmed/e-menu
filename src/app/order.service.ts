@@ -49,4 +49,8 @@ export class OrderService {
     console.log(this.filterCollection);
   }
 
+  getOrderStatus(){
+    
+  }
+
 }

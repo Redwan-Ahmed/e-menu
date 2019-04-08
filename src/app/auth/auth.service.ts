@@ -20,6 +20,8 @@ export class AuthService {
   userData: any; // Save logged in user data
   user$: Observable<firebase.User>;
 
+  userDoc: AngularFirestoreDocument<any>;
+
   constructor(
     private db: AngularFirestore,
     private userService: UserService,
@@ -112,6 +114,16 @@ export class AuthService {
 
         return Observable.of(null);
       });    
+  }
+
+  switchToOffPeak(userId){
+    this.userDoc = this.db.doc<any>('users/' + userId);
+    this.userDoc.update({offPeak: true});
+  }
+
+  switchToPeakTimes(userId){
+    this.userDoc = this.db.doc<any>('users/' + userId);
+    this.userDoc.update({offPeak: false});
   }
 
 }

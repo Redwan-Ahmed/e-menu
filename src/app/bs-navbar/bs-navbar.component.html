@@ -15,21 +15,24 @@
           </li>
         </ng-template>
         <li ngbDropdown *ngIf="appUser; else anonymousUser" class="nav-item dropdown">
-          <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-weight: bold; font-size: large;">
             {{ appUser.name }}
           </a>
           <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdown01">
             <ng-container *ngIf="appUser.isAdmin">
-              <a class="dropdown-item" routerLink="/my/orders">Predictive Ordering</a>
-              <a class="dropdown-item" routerLink="/admin/orders">Manage Orders</a>
-              <a class="dropdown-item" routerLink="/admin/products">Manage Products</a>
+              <a class="dropdown-item" routerLink="/my/orders" style="text-align: center;">Predictive Ordering & History</a>
+              <a class="dropdown-item" routerLink="/admin/orders" style="text-align: center;">Manage Orders</a>
+              <a class="dropdown-item" routerLink="/admin/products" style="text-align: center;">Manage Products</a>
               <div class="dropdown-divider"></div>
             </ng-container>
             <a class="dropdown-item" (click)="logout()" style="cursor: pointer; text-align: center; color: red">Log Out</a>
           </div>
         </li>
       </ul>
-    </div>
 
+      <button type="button" class="btn btn-warning" (click)="peakTimesMode(userId)" *ngIf="appUser && offPeak">Off Peak</button>
+      <button type="button" class="btn btn-warning" (click)="offPeakMode(userId)" *ngIf="appUser && !offPeak">Peak Times</button>
+
+    </div>
 
   </nav>

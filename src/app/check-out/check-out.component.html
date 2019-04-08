@@ -35,10 +35,45 @@
             <span class="sr-only"></span>
           </div>
         </div>
-        <p class="card-text" *ngIf="orderStatus === 'active'" style="font-size: small; font-style: italic;">Order has been started! Coming up in {{ this.prepTimeCalculation }} minutes </p>
-        <p class="card-text" *ngIf="orderStatus === 'processing'" style="font-size: small; font-style: italic;">Waiting for the Chef to start this order </p>
-        <p class="card-text" *ngIf="orderStatus === 'completed'" style="font-size: small; font-style: italic;">Few seconds away...The Chef just has to plate up and garnish your dish</p>
+        <p class="card-text" *ngIf="orderStatus === 'active'" style="font-size: small; font-style: italic;">Order has
+          been started! Coming up in {{ this.prepTimeCalculation }} minutes </p>
+        <p class="card-text" *ngIf="orderStatus === 'processing'" style="font-size: small; font-style: italic;">Waiting
+          for the Chef to start this order </p>
+        <p class="card-text" *ngIf="orderStatus === 'completed'" style="font-size: small; font-style: italic;">Few
+          seconds away...The Chef just has to plate up and garnish your dish</p>
       </div>
     </div>
   </div>
+  <div *ngIf="orderStatus === 'completed' && !offPeak" style="width:100%;">
+    <div class="card text-center" style="width:100%; bottom: 250px;">
+      <div class="card-header" style="font-weight: bold; font-size: 25px">
+        Notification
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Food shall arrive to your table soon!</h5>
+        <p></p>
+        <a href="#" class="btn btn-primary btn-lg">OK</a>
+        <p></p>
+        <p class="card-text" style="font-style: italic; font-size: small;">Please press "OK" once the food has arrived.</p>
+      </div>
+      <div class="card-footer" style="font-style: italic;">
+        A few seconds away...The Chef just has to plate up and garnish your dish
+      </div>
+    </div>
+  </div>
+  <div *ngIf="orderStatus === 'completed' && offPeak" style="width:100%;">
+      <div class="card text-center text-white bg-danger border-danger" style="width:100%; bottom: 250px;">
+        <div class="card-header" style="font-weight: bold; font-size: 25px">
+          Notification
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Please go to the Front and collect your food!</h5>
+          <p></p>
+          <a href="#" class="btn btn-primary btn-lg">OK</a>
+        </div>
+        <div class="card-footer" style="font-style: italic;">
+          Your food is waiting to be picked up from the front...
+        </div>
+      </div>
+    </div>
 </div>

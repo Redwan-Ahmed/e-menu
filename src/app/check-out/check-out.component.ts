@@ -4,6 +4,8 @@ import { ShoppingCartService } from '../shopping-cart.service';
 import { ActivatedRoute } from '@angular/router';
 import * as $ from "jquery";
 import { OrderService } from '../order.service';
+import { AuthService } from '../auth/auth.service';
+import { AppUser } from '../models/app-user';
 
 @Component({
   selector: 'app-check-out',
@@ -16,6 +18,9 @@ export class CheckOutComponent implements OnInit {
   id: string;
   orderStatus: any;
 
+  appUser: AppUser;
+  offPeak: boolean;
+
   listTemp: any[] = [];
   prepTimeSum: number;
   statusCount: number;
@@ -27,10 +32,18 @@ export class CheckOutComponent implements OnInit {
     private route: ActivatedRoute,
     private db: AngularFirestore,
     private renderer: Renderer2,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private authService: AuthService
   ) {
     this.id = this.route.snapshot.paramMap.get('id');
     console.log("this.id", this.id);
+
+    authService.appUser$.subscribe(appUser => {
+      this.appUser = appUser;
+      this.offPeak = appUser.offPeak;
+      console.log("AppUser Off Peak", this.offPeak);
+    });
+
 
     //This is the main logic for the preperation time algorithm
     if (this.id) this.cartService.getOrderDoc(this.id).subscribe(order => {

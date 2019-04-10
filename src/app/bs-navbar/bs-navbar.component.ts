@@ -16,16 +16,25 @@ export class BsNavbarComponent implements OnDestroy {
 
   subscription: Subscription;
 
+  modeSubscription: Subscription;
+
   constructor(private authService: AuthService) { 
     // authService.appUser$.subscribe(appUser => this.appUser = appUser);
 
     this.subscription = authService.appUser$.subscribe(appUser => {
       this.appUser = appUser;
-      this.offPeak = appUser.offPeak;
-      console.log("AppUser Off Peak, Nav Bar", this.offPeak);
+      // this.offPeak = appUser.offPeak;
+      // console.log("AppUser Off Peak, Nav Bar", this.offPeak);
       this.userId = appUser.uid;
       console.log("AppUser ID, Nav Bar", this.userId);
     });
+
+    this.modeSubscription = authService.mode.subscribe(modes => {
+      this.offPeak = modes.offPeak;
+      console.log("AppUser Off Peak, Nav Bar", this.offPeak);
+    });
+
+
   }
 
   logout(){
@@ -42,6 +51,7 @@ export class BsNavbarComponent implements OnDestroy {
 
   ngOnDestroy(){
     this.subscription.unsubscribe();
+    this.modeSubscription.unsubscribe();
   }
 
 }

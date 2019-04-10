@@ -10,3 +10,35 @@ h4 {text-align:center;}
     position: relative;
     top: 150px;
 }
+
+
+/* I used the following styling to help me place the <div> in my .html component in the center of the screen.
+   Source: https://ctrlq.org/code/19623-absolute-center-css 
+   [used in line 18-43 check-out.component.ts, & line 2, 48, 65 check-out.component.html]
+*/
+.Absolute-Center { 
+    height: 50%; /* Set your own height: percents, ems, whatever! */
+    width: 50%; /* Set your own width: percents, ems, whatever! */
+    overflow: auto; /* Recommended in case content is larger than the container */
+    margin: auto; /* Center the item vertically & horizontally */
+    position: absolute; /* Break it out of the regular flow */
+    top: 0; left: 0; bottom: 0; right: 0; /* Set the bounds in which to center it, relative to its parent/container */
+  }
+  
+  /* Make sure our center blocks stay in their container! */
+  .Center-Container { position: relative; }
+
+  /* Fixed floating element within viewport */
+  .Absolute-Center.is-Fixed { 
+    position: fixed;
+    z-index: 999;
+  }
+  
+  /* Min/Max Width */
+  .Absolute-Center.is-Responsive {
+    width: 60%; 
+    height: 60%;
+    min-width: 200px;
+    max-width: 400px;
+    padding: 40px;
+  }

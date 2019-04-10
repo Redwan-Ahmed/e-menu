@@ -1,5 +1,5 @@
 <h1>Order</h1>
-<div class="row">
+<div class="row Center-Container">
   <div class="col-4">
     <div class="card" id="first">
       <div class="card-body">
@@ -35,6 +35,7 @@
             <span class="sr-only"></span>
           </div>
         </div>
+        <p></p>
         <p class="card-text" *ngIf="orderStatus === 'active'" style="font-size: small; font-style: italic;">Order has
           been started! Coming up in {{ this.prepTimeCalculation }} minutes </p>
         <p class="card-text" *ngIf="orderStatus === 'processing'" style="font-size: small; font-style: italic;">Waiting
@@ -44,8 +45,8 @@
       </div>
     </div>
   </div>
-  <div *ngIf="orderStatus === 'completed' && !offPeak" style="width:100%;">
-    <div class="card text-center" style="width:100%; bottom: 250px;">
+  <div class="Absolute-Center is-Fixed" *ngIf="orderStatus === 'completed' && !offPeak">
+    <div class="card text-center border-dark">
       <div class="card-header" style="font-weight: bold; font-size: 25px">
         Notification
       </div>
@@ -54,21 +55,24 @@
         <p></p>
         <a href="#" class="btn btn-primary btn-lg">OK</a>
         <p></p>
-        <p class="card-text" style="font-style: italic; font-size: small;">Please press "OK" once the food has arrived.</p>
+        <p class="card-text" style="font-style: italic; font-size: small;">Please press "OK" once the food has arrived</p>
       </div>
       <div class="card-footer" style="font-style: italic;">
-        A few seconds away...The Chef just has to plate up and garnish your dish
+        A few seconds away...The Chef just has to plate up and garnish your order
       </div>
     </div>
   </div>
-  <div *ngIf="orderStatus === 'completed' && offPeak" style="width:100%;">
-      <div class="card text-center text-white bg-danger border-danger" style="width:100%; bottom: 250px;">
+  <div class="Absolute-Center is-Fixed" *ngIf="orderStatus === 'completed' && offPeak">
+      <div class="card text-center text-white bg-danger border-danger">
         <div class="card-header" style="font-weight: bold; font-size: 25px">
           Notification
         </div>
         <div class="card-body">
-          <h5 class="card-title">Please go to the Front and collect your food!</h5>
+          <h5 class="card-title">Order Ref: {{ id }}</h5>
+          <p>Take a photo of your order reference, for a speedy service!</p>
+          <img src="assets/collect-icon.png" style="width:250px;height:125px;">
           <p></p>
+          <p style="font-weight: bold;">Show your Order Reference at the front & collect your order</p>
           <a href="#" class="btn btn-primary btn-lg">OK</a>
         </div>
         <div class="card-footer" style="font-style: italic;">

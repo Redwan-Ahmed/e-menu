@@ -11,6 +11,7 @@ import { switchMap } from 'rxjs/operators';
 import { UserService } from '../user.service';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/observable/of'; 
+import { Mode } from '../models/mode';
 
 
 @Injectable({
@@ -21,6 +22,9 @@ export class AuthService {
   user$: Observable<firebase.User>;
 
   userDoc: AngularFirestoreDocument<any>;
+
+  modesDoc: AngularFirestoreDocument<Mode>;
+  modeDoc: Observable<Mode>;
 
   constructor(
     private db: AngularFirestore,
@@ -117,13 +121,20 @@ export class AuthService {
   }
 
   switchToOffPeak(userId){
-    this.userDoc = this.db.doc<any>('users/' + userId);
+    this.userDoc = this.db.doc<any>('modes/Y8oRoRkV0sqpZn11zKQU');
     this.userDoc.update({offPeak: true});
   }
 
   switchToPeakTimes(userId){
-    this.userDoc = this.db.doc<any>('users/' + userId);
+    this.userDoc = this.db.doc<any>('modes/Y8oRoRkV0sqpZn11zKQU');
     this.userDoc.update({offPeak: false});
+  }
+
+  get mode(){
+    this.modesDoc = this.db.doc<Mode>('modes/Y8oRoRkV0sqpZn11zKQU');
+    //this Y8oRoRkV0sqpZn11zKQU is fixed because we only want to access this document collection only at ALL times.
+    this.modeDoc = this.modesDoc.valueChanges();
+    return this.modeDoc;
   }
 
 }

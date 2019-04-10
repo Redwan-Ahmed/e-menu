@@ -1,25 +1,25 @@
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Renderer2, OnDestroy } from '@angular/core';
 import { ShoppingCartService } from '../shopping-cart.service';
 import { ActivatedRoute } from '@angular/router';
 import * as $ from "jquery";
 import { OrderService } from '../order.service';
 import { AuthService } from '../auth/auth.service';
-import { AppUser } from '../models/app-user';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-check-out',
   templateUrl: './check-out.component.html',
   styleUrls: ['./check-out.component.css']
 })
-export class CheckOutComponent implements OnInit {
+export class CheckOutComponent implements OnInit, OnDestroy {
 
   order$: any;
   id: string;
   orderStatus: any;
 
-  appUser: AppUser;
   offPeak: boolean;
+  modeSubscription: Subscription;
 
   listTemp: any[] = [];
   prepTimeSum: number;
@@ -38,9 +38,8 @@ export class CheckOutComponent implements OnInit {
     this.id = this.route.snapshot.paramMap.get('id');
     console.log("this.id", this.id);
 
-    authService.appUser$.subscribe(appUser => {
-      this.appUser = appUser;
-      this.offPeak = appUser.offPeak;
+    this.modeSubscription = authService.mode.subscribe(modes => {
+      this.offPeak = modes.offPeak;
       console.log("AppUser Off Peak", this.offPeak);
     });
 
@@ -195,6 +194,10 @@ export class CheckOutComponent implements OnInit {
     }).catch(err => {
       console.log('Error getting documents', err);
     });
+  }
+
+  ngOnDestroy(){
+    this.modeSubscription.unsubscribe();
   }
 
 }

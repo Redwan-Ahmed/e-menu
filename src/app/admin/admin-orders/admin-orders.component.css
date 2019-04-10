@@ -1,12 +1,16 @@
+/* This component is for styling the admin-orders.component.html */
+/* Allows the tables displayed to have a fixed layout */
 .table {
     table-layout: fixed ;
     width: 100% ;
   }
-
+/* The width of the table is fixed at 25% */
   .td {
     width: 25% ;
   }
 
+/* Line 14-16 just allows the header 1 to be displayed in the center
+   Line 18-21 adds some padding/spacing between headers */
   h1{
     text-align: center;
   }

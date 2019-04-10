@@ -1,0 +1,10 @@
+/* Line 3-5 just allows header 1 to be displayed in the center
+   Line 7-10 adds some padding/spacing between headers */
+   h1 {
+    text-align: center;
+  }
+
+  h1, h2, h3, h4, h5, h6{
+    margin-top:20px;
+    margin-bottom:10px;
+  }

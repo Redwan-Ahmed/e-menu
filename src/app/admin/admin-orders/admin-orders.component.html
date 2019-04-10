@@ -1,11 +1,9 @@
 <h1>Order Management</h1>
-        <!-- <div class="list-group">
-          <a href="#processing" class="list-group-item list-group-item-action active">Processing Orders</a>
-          <a href="#active" class="list-group-item list-group-item-action">Active Orders</a>
-        </div> -->
   <div>
     <h3 id="processing">Processing Orders</h3>
+    <!-- Here the system is checking thorugh orders via a for loop (ngFor) -->
     <ng-container *ngFor="let o of orders$">
+    <!-- Here the system is checking thorugh orders which have the status equal to processing (ngIf) -->
       <table class="table" *ngIf="o.order.status ==='processing'">
         <thead>
           <tr>
@@ -17,6 +15,7 @@
         </thead>
         <tbody>
           <tr>
+    <!-- {{ o.id }}, {{ o.order.status }}... is an interpolation of data, allowing me to embed data to marked up text -->
             <td>{{ o.id }}</td>
             <td>{{ o.order.status }}</td>
             <td>
@@ -25,6 +24,7 @@
                   <th>Product Title</th>
                   <th>Quantity<th>
                 </tr>
+  <!-- This table displays products which belong to each order, via looping through each product array in the order (ngFor) -->
                 <tr *ngFor="let orderProduct of o.order.product">
                   <td>{{orderProduct.title}}</td>
                   <td>{{orderProduct.quantity}}</td>
@@ -32,6 +32,7 @@
               </table>
             </td>
             <td>
+    <!-- Added a button called "Start Order", which then calls the start() function in the component.ts file (line 35) when clicked on -->
               <button (click)="start(o.id)" class="btn btn-primary btn-block">Start Order</button>
             </td>
           </tr>
@@ -41,7 +42,9 @@
   </div>
   <div>
     <h3 id="active">Active Orders</h3>
+  <!-- Here the system is checking thorugh orders via a for loop (ngFor) -->
     <ng-container *ngFor="let o of orders$">
+  <!-- Here the system is checking thorugh orders which have the status equal to active (ngIf) -->
       <table class="table" *ngIf="o.order.status === 'active'">
         <thead>
           <tr>
@@ -52,6 +55,7 @@
         </thead>
         <tbody>
           <tr>
+  <!-- {{ o.id }}, {{ o.order.status }}... is an interpolation of data, allowing me to embed data to marked up text -->
             <td>{{ o.id }}</td>
             <td>{{ o.order.status }}</td>
             <td>
@@ -60,6 +64,7 @@
                   <th>Product Title</th>
                   <th>Quantity<th>
                 </tr>
+  <!-- This table displays products which belong to each order, via looping through each product array in the order (ngFor) -->
                 <tr *ngFor="let orderProduct of o.order.product">
                   <td>{{orderProduct.title}}</td>
                   <td>{{orderProduct.quantity}}</td>

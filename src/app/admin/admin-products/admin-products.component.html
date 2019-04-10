@@ -1,12 +1,20 @@
+<h1>Manage Products</h1>
+<h2>Add Product</h2>
 <p>
+<!-- This button navigates users to the new product page (path = /admin/products/new); 
+     Note: "/new" notifies the system that a new product is being added not an existing product. -->
   <a routerLink="/admin/products/new" class="btn btn-primary">New Product</a>
 </p>
 <p>
+<!-- Here there is a search bar placed, via <input>, which allows users to filter products; 
+     Note: the filter is done by querying a string (input), which calls the filter(query: string) function,
+           the "#query (keyup)" function allows me to query whilst the user is typing -->
   <input
     #query
     (keyup)="filter(query.value)"
     type="text" class="form-control" placeholder="Search...">
 </p>
+<h2 style="text-align: center">Products</h2>
 <table class="table">
   <thead>
     <tr>

@@ -20,27 +20,27 @@ export class AdminOrdersComponent implements OnInit, OnDestroy {
   }
 
   getAllOrders() {
-  /** The orderSubscription variable is subscribing to all orders in the orders collection in firebase.
-   *  This is done by calling the OrderService, which then allows me to use the getAllOrders() function, which I then subscribe to.
+/** The orderSubscription variable is subscribing to all orders in the orders collection in firebase.
+   * This is done by calling the OrderService, which then allows me to use the getAllOrders() function, which I then subscribe to.
    * the variable orders$ is then set to orders, so that it can be called in the component.html file.
-  */
+*/
     this.orderSubscription = this.orderService.getAllOrders().subscribe(orders => {
       this.orders$ = orders;
     });
   }
 
-  /** The start() function calls the OrderService: startOrder() function, which takes id as a parameter.
-   *  The id is passed thorugh the html file, when the button is clicked (line 36: admin-orders.component.html)
-  */
+/** The start() function calls the OrderService: startOrder() function, which takes id as a parameter.
+   * The id is passed thorugh the html file, when the button is clicked (line 36: admin-orders.component.html)
+*/
   start(id){
     this.orderService.startOrder(id);
   }
 
   ngOnDestroy() {
-  /** Here I destroy the subscription or unsubscribe
-   *  This is done to avoid memory leaks, 
-   *  and to allow us to detect changes so it can unsubscribe and then subscribe to new changes.
-   */
+/** Here I destroy the subscription or unsubscribe
+   * This is done to avoid memory leaks, 
+   * and to allow us to detect changes so it can unsubscribe and then subscribe to new changes.
+*/
     this.orderSubscription.unsubscribe();
   }
 

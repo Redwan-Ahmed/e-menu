@@ -25,11 +25,14 @@
     </tr>
   </thead>
   <tbody>
+  <!-- Used ngFor to display orders which are being filtered, the filteredProducts array is the array which stores the query of products -->
     <tr *ngFor="let p of filteredProducts">
+  <!-- Used interpolation of data e.g. {{ p.title }}, allowing me to embed data to marked up text (p = filteredProducts)-->
       <td>{{ p.title }}</td>
       <td>{{ p.category }}</td>
       <td>{{ p.price }}</td>
       <td>
+  <!-- If the user clicks edit on a product, the product id gets pushed into the url so the page can load the products details -->
         <a [routerLink]="['/admin/products/', p.id]">Edit</a>
       </td>
     </tr>

@@ -1,34 +1,34 @@
-import { Product } from './models/product';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { Injectable, OnDestroy } from '@angular/core';
-import { take, map } from 'rxjs/operators';
-import { Subscription, Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Order } from './models/order';
-import 'rxjs/add/operator/map'
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class ShoppingCartService implements OnDestroy{
-  subscription: Subscription;
-
+export class ShoppingCartService  {
+/** Here all local variables are declared in side this component.ts file */
   orderDoc: AngularFirestoreDocument<Order>;
   ordDoc: Observable<any>;
-
   orderCol: AngularFirestoreCollection<Order>;
-
   order$: Order;
 
-
   constructor(private db: AngularFirestore) { }
-
+/** This method adds an order object to the orders collection in firebase */
   checkoutCart(order: Order){
     return new Promise((resolve, reject) => {
       this.db.firestore.collection('orders').add({order}).then(res => {
         resolve (res.id);
       });
     });
+  }
+
+/** This method allows me to get a document stored in the orders collection, by passing through the orderId */
+  getOrderDoc(orderId) {
+    this.orderDoc = this.db.doc('orders/' + orderId);
+    this.ordDoc = this.orderDoc.valueChanges();
+    return this.ordDoc;
   }
 
 //** get a subcollection data in firebase: no longer needed but kept for an example */
@@ -46,16 +46,5 @@ export class ShoppingCartService implements OnDestroy{
   //       return order;
   //   }
   // }
-
-  // This allows me to get a document stored in the orders collection, passing through the orderId via Url
-  getOrderDoc(orderId) {
-    this.orderDoc = this.db.doc('orders/' + orderId);
-    this.ordDoc = this.orderDoc.valueChanges();
-    return this.ordDoc;
-  }
-
-  ngOnDestroy(){
-    this.subscription.unsubscribe();
-  }
 
 }

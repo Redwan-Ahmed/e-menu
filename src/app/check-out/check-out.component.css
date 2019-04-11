@@ -1,11 +1,13 @@
+/** Align header 1 (<h1>) and header 4 (<h4>) to the center of the screen */
 h1 {text-align:center;}
 h4 {text-align:center;}
 
+/** the card with id=first has its position set here */
 .card#first { 
     position: relative;
     top: 20px;
 }
-
+/** the card with id=second has its position set here */
 .card#second {
     position: relative;
     top: 150px;
@@ -13,8 +15,8 @@ h4 {text-align:center;}
 
 
 /* I used the following styling to help me place the <div> in my .html component in the center of the screen.
-   Source: https://ctrlq.org/code/19623-absolute-center-css 
-   [used in line 18-43 check-out.component.ts, & line 2, 48, 65 check-out.component.html]
+   Source: https://ctrlq.org/code/19623-absolute-center-css [ctrlq.org]
+   [used in line 21-46 check-out.component.ts, & line 4, 56, 75 check-out.component.html]
 */
 .Absolute-Center { 
     height: 50%; /* Set your own height: percents, ems, whatever! */

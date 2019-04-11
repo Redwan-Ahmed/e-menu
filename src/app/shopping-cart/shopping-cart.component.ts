@@ -1,5 +1,5 @@
 import { Order } from './../models/order';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { ShoppingCartService } from '../shopping-cart.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -8,8 +8,9 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './shopping-cart.component.html',
   styleUrls: ['./shopping-cart.component.css']
 })
-export class ShoppingCartComponent implements OnInit, OnDestroy{
 
+export class ShoppingCartComponent {
+/** Here all local variables are declared in side this component.ts file */
   order$: any;
   id: string;
   
@@ -18,27 +19,25 @@ export class ShoppingCartComponent implements OnInit, OnDestroy{
     private route: ActivatedRoute,
     private router: Router
   ) { 
+/** This gets the id passed through the URL and stores it into the id variable */
     this.id = this.route.snapshot.paramMap.get('id');
     console.log("this.id", this.id);
 
-    //take operator allows me to take one object and no need to unsubscirbe
+/** take operator allows me to take one object and no need to unsubscribe */
     if (this.id) this.cartService.getOrderDoc(this.id).take(1).subscribe(order => { 
       this.order$ = order.order; 
       console.log('1', this.id);
       console.log('2', this.order$);
       });
-    
   }
-
-  ngOnInit() { }
-
+/** This method gets the total quantity in the cart */
   totalQuantity(count: number) {
     count = 0;
     for (let id in this.order$.product)
       count += this.order$.product[id].quantity;
     return count;
   }
-
+/** This method gets the total cart price */
   getTotalCartPrice() {
     let sum;
     sum = this.order$.product.map(a => a.price * a.quantity)
@@ -48,13 +47,12 @@ export class ShoppingCartComponent implements OnInit, OnDestroy{
     console.log('totalCartPrice', totalCartPrice);
     return totalCartPrice;
   }
-
+/** Since this is not cormercially available there is no need for payment processors,
+  * Thus I just push the order to the next page, with the order ID.
+*/
   payment(){
     this.router.navigate(['/check-out/' + this.id]);
     console.log("The order has been paid!");
-  }
-
-  ngOnDestroy() {
   }
 
 }

@@ -2,7 +2,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { ShoppingCartService } from './../shopping-cart.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from './../product.service';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Product } from '../models/product';
 import { Subscription } from 'rxjs';
 import * as _ from 'lodash';
@@ -13,7 +13,8 @@ import { Order } from '../models/order';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
-export class ProductsComponent implements OnInit, OnDestroy {
+export class ProductsComponent implements OnInit {
+/** Here all local variables are declared in side this component.ts file */
   products: Product[] = [];
   filteredProducts: Product[] = [];
   category: string;
@@ -32,11 +33,11 @@ export class ProductsComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router
   ) {
+/** Here we get all the products from the products collection, return it as filteredProducts */
     productService.getAll().switchMap(products => {
       this.products = products;
       return route.queryParamMap;
     })
-
       .subscribe(params => {
         this.category = params.get('category');
 
@@ -44,16 +45,11 @@ export class ProductsComponent implements OnInit, OnDestroy {
           this.products.filter(p => p.category === this.category) :
           this.products;
       });
-
-    //* to get number of documents in a collection  */
-    // this.db.collection('orders').get().toPromise().then(snap => {
-    //   this.orderSize = snap.size
-    //   console.log('order size', this.orderSize);
-    // });
   }
 
   async ngOnInit() { }
 
+/** onAddProduct adds a product to the food cart, if the product exists then increase the quantity by 1 */
   onAddProduct(product) {
     // lodash example for searching for a product in an array - not used but an alternative method
     // let existingProduct = _.find(this.shoppingCartCollection, (o) => { return o.id === product.id; });
@@ -81,6 +77,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   }
 
+/** onRemoveProduct removes a product from the food cart, if the product exists then decrease the quantity by 1 */
   onRemoveProduct(product) {
     let isProductExist = false;
     for (let index = 0; index < this.shoppingCartCollection.length; index++) {
@@ -102,6 +99,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     }
   }
 
+/** The checkout function passes through the order object and saves it into firebase (cartService.checkoutCart()) */
   checkout(order: Order) {
     var d = new Date();
     var weekday = new Array(7);
@@ -113,19 +111,24 @@ export class ProductsComponent implements OnInit, OnDestroy {
     weekday[5] = "Friday";
     weekday[6] = "Saturday";
     var n = weekday[d.getDay()];
-
+/** model is just an temporary Order Interface which sets the status, day and product array */
     this.model = {
       status: "processing",
-      // orderId: localStorage.getItem('orderId'),
+// orderId: localStorage.getItem('orderId'), /** Previously use to store orderId now we pass it through the URL */
       day: n,
       product: this.shoppingCartCollection
     }
+/** Here I push the model into the checkoutCart() function which then saves the model as an object in the orders collection */
     this.cartService.checkoutCart(this.model).then(res => {
+/** Feed the order ID thorugh the URL */
       this.router.navigate(['/shopping-cart/' + res]);
     })
     console.log('This Order has been saved!');
   }
 
+/** This method gets the total price for the cart, 
+  * by a.price * a.quantity each product and then storing the result in an array
+  * the numbers in the array are then added together to give the total sum */
   getTotalCartPriceShoppingCartCollection() {
     let sum;
     sum = this.shoppingCartCollection.map(a => a.price * a.quantity)
@@ -135,7 +138,5 @@ export class ProductsComponent implements OnInit, OnDestroy {
     console.log('totalCartPrice', totalCartPrice);
     return totalCartPrice;
   }
-
-  ngOnDestroy() { }
 
 }

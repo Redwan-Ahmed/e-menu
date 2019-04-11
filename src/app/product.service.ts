@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ProductService {
-
+/** Here all local variables are declared in side this component.ts file */
   productCollection: AngularFirestoreCollection<Product>;
   products: Observable<Product[]>;
 
@@ -16,20 +16,14 @@ export class ProductService {
   prodDoc: Observable<Product>;
 
   constructor(private db: AngularFirestore) {
+/** Setting the productCollection path for firebase */    
     this.productCollection = this.db.collection('products');
-
-    // this.products = this.productCollection.snapshotChanges().pipe(
-    //   map(changes => changes.map(a => {
-    //     const data = a.payload.doc.data() as Product;
-    //     const id = a.payload.doc.id;
-    //     return { id, ...data }
-    //   })))
   }
-
+/** This method adds a new product to the product collection */
   create(product: Product) {
     this.db.collection('products').add(product);
   }
-
+/** This method gets ALL the products from the products collection */
   getAll() {
     let products = this.productCollection.snapshotChanges().pipe(
       map(changes => changes.map(a => {
@@ -37,27 +31,22 @@ export class ProductService {
         const id = a.payload.doc.id;
         return { id, ...data }
       })))
-
     return products;
   }
-
+/** This method returns a single product from the product collection */
   getProduct(productId) {
-    //Using a Document to get a single data
     this.productDoc = this.db.doc<Product>('products/' + productId);
     this.prodDoc = this.productDoc.valueChanges();
     return this.prodDoc;
-    //this works too
-    // return this.db.doc<Product>('products/' + productId).valueChanges();
   }
-
+/** This method uodates an existing product by using the update() function and passing through the product */
   updateProduct(productId, product) {
     this.productDoc = this.db.doc<Product>('products/' + productId);
     this.productDoc.update(product);
   }
-
+/** This method deletes an existing product by using the delete() function and passing through the product */
   deleteProduct(productId) {
     this.productDoc = this.db.doc<Product>('products/' + productId);
     this.productDoc.delete();
   }
-
 }

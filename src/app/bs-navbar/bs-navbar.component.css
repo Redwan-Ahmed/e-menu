@@ -1,3 +1,4 @@
+/* Allows a cursor type pointer to be displayed when hovered over the dropdown list.*/
 .dropdown-toggle {
     cursor: pointer;
 }

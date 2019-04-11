@@ -1,6 +1,13 @@
+<!-- The html file has been inspired from my Udemy Course; Section 21 Lecture 317 (Partial code has been re-used)
+     Source: https://www.udemy.com/the-complete-angular-master-class/learn/v4/t/lecture/7807716?start=0 [Udemy] -->
 <div class="row">
   <div class="col-md-6">
+<!-- ngForm creates a top-level FormGroup instance and binds it to a form to track aggregate form value and validation status.
+     Source: https://angular.io/api/forms/NgForm (Angular Docs)  -->
+<!-- ngSubmit is used to submit the entires inside the input fields, ngSubmit calls the save() method in the component.ts file -->
     <form #f="ngForm" (ngSubmit)="save(f.value)">
+<!-- In this ngForm there is a total of 5 form groups (input fields);
+     which are Title (line 9-13), Price (15-24), Category (line 25-34), Image URL (Line 35-42) and Preparation Time (line 43-50) -->
           <div class="form-group">
             <label for="title">Title</label>
             <input #title="ngModel" [(ngModel)]="product.title" name="title" id="title" type="text" class="form-control" required>
@@ -43,14 +50,20 @@
                 <div *ngIf="prepTime.errors.min">The Preparation Time should be 1 or higher.</div>
               </div>
           </div>
+<!-- Here is the Save and Delete button which call a function in the component.ts file;
+     The Save button is triggered by the ngSubmit (line 6), which then pushes the values via save function in the .ts file
+     The Delete button calls the function delete() when clicked on, found in the .ts file lines 90-104 -->
           <button class="btn btn-primary">Save</button>
           <button type="button" (click)="delete()" class="btn btn-danger">Delete</button>
     </form>
   </div>
+<!-- This <div> is responsible of displaying the card of a product during the edit or adding a new product process
+     Source: https://getbootstrap.com/docs/4.3/components/card/ [bootstrap]-->
   <div class="col-md-6">
     <div *ngIf="product.title" class="card" style="width: 20rem;">
         <img [src]="product.imageUrl" class="card-img-top" *ngIf="product.imageUrl">
         <div class="card-body">
+<!-- Interpolation of data is used here, to allow me to embed data to marked up text -->
           <h4 class="card-title">{{ product.title }}</h4>
           <h5 class="card-title">{{ product.category }}</h5>
           <p class="card-text">{{ product.price | currency:'GBP' }}</p>

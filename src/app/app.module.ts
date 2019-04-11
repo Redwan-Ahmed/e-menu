@@ -35,6 +35,7 @@ import { ProductCardComponent } from './product-card/product-card.component';
 import { OrderService } from './order.service';
 
 @NgModule({
+/** All the components in the Project are listed bellow, some components may not have been used */
   declarations: [
     AppComponent,
     BsNavbarComponent,
@@ -51,6 +52,7 @@ import { OrderService } from './order.service';
     ProductsFilterComponent,
     ProductCardComponent
   ],
+/** Initialising the imports here, so that they can be accessed globally in this project */
   imports: [
     BrowserModule,
     FormsModule,
@@ -61,6 +63,10 @@ import { OrderService } from './order.service';
     AngularFirestoreModule,
     NgbModule.forRoot(),
     RouterModule.forRoot([
+/** Here we are set the routes for each page/component
+  * We are also protecting the Routes which are sensitive (users cannot jump to a page by typing the URL Address)
+  * Source: https://www.udemy.com/the-complete-angular-master-class/learn/v4/t/lecture/7805986?start=0 [Udemy, Section 20, Lecture 292]
+ */
       { path: '', component: ProductsComponent },
       { path: 'products', component: ProductsComponent },
       { path: 'shopping-cart/:id', component: ShoppingCartComponent },
@@ -76,6 +82,7 @@ import { OrderService } from './order.service';
       { path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthGuard, AdminAuthGuard] }
     ])
   ],
+/** All the services used in the project are declared here as providers */
   providers: [
     AuthService, 
     AuthGuard,

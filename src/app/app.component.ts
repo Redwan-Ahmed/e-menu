@@ -10,8 +10,12 @@ import { UserService } from './user.service';
 })
 export class AppComponent {
   title = 'oshop';
-
+  
+/** Some code has been re-used from my Udemy Course; Section 11, lecture 149
+ * Source: https://www.udemy.com/the-complete-angular-master-class/learn/v4/t/lecture/7501702?start=0 [Udemy]
+*/
   constructor(private userService: UserService, private authService: AuthService, router: Router){
+/** Here we subscribe to the user, through the authService, ans save the user in the local storage */
     authService.user$.subscribe(user => {
       if (!user) return;
         userService.save(user);
@@ -21,7 +25,6 @@ export class AppComponent {
 
         localStorage.removeItem('returnUrl');
         router.navigateByUrl(returnUrl);
-      
     });
   }
 }

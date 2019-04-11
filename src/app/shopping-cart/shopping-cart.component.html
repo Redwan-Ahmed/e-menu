@@ -1,5 +1,8 @@
+<!-- Some code on this file have been re-used from my Udemy Course; Section 23, Lecture: 338-348
+     Source: https://www.udemy.com/the-complete-angular-master-class/learn/v4/t/lecture/7859988?start=150 [Udemy] -->
 <h1>Food Cart</h1>
 <div class="row col-10" *ngIf="order$?.product">
+<!-- total quantity is displayed here by using interpolation of data, allowing me to embed data to marked up text -->
   <p>
     You have {{ totalQuantity() }} items in your Food Cart.
   </p>
@@ -16,6 +19,7 @@
     <tbody>
       <tr *ngFor="let order of order$?.product">
         <td>
+<!-- the Image added to this div has been specially styled in order to fit into a thumbnail, check the .css file -->
           <div [style.backgroundImage]="'url(' + order.imageUrl + ')'" class="thumbnail"></div>
         </td>
         <td>

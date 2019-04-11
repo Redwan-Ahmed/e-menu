@@ -1,8 +1,12 @@
+<!-- Some code has been re-ued from my Udemy course (Section 22)
+     Source: https://www.udemy.com/the-complete-angular-master-class/learn/v4/t/lecture/7824562?start=0 [Udemy] -->
 <div class="row">
   <div class="col-3">
+<!-- The category is displayed here, We call the products filter to allow the products to be filtered by category -->
     <products-filter [category]="category"></products-filter>
     <div class="sticky-top">
       <div class="list-group">
+<!-- The Food Cart is displayed here; we populate the cart with the shoppingCartCollection array -->
         <li class="list-group-item list-group-item-action list-group-item-success">Food Cart</li>
       </div>
       <div class="list-group list-group-flush">
@@ -11,6 +15,7 @@
         <li class="list-group-item font-weight-bold" *ngIf="shoppingCartCollection?.length > 0">Total Price 
           {{ getTotalCartPriceShoppingCartCollection() | currency:'GBP' }}</li>
       </div>
+<!-- This button allows user to checkout IF there are products in the shoppingCartCollection -->
       <button (click)="checkout(model)" *ngIf="shoppingCartCollection?.length" class="btn btn-primary btn-block">Checkout</button>
     </div>
   </div>
@@ -18,6 +23,7 @@
     <div class="row">
       <ng-container *ngFor="let p of filteredProducts; let i = index">
         <div class="col">
+<!-- Re-used the product-card component to display products -->
           <product-card (onRemoveProduct)="onRemoveProduct($event)" (onAddProduct)="onAddProduct($event)" [product]="p" [shoppingCart]="shoppingCartCollection"></product-card>
         </div>
         <div *ngIf="(i + 1) % 2 === 0" class="w-100"></div>

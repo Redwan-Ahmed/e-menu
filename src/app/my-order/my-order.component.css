@@ -16,7 +16,8 @@ h3{
     margin-top:40px;
     margin-bottom:10px;
   }
-
+/* I re-used the styling I learnt from my Udemy Course (Section 23, Lecture 348)
+Source: https://www.udemy.com/the-complete-angular-master-class/learn/v4/t/lecture/7860018?start=15 [Udemy] */
   .thumbnail{
     width: 80px;
     height: 80px;
@@ -35,7 +36,7 @@ h3{
 
 /* This style highlights the first row of the predicting ordering table, so its easier for the user to see
 Source 1: https://stackoverflow.com/questions/10450221/apply-style-to-cells-of-first-row (showed me how to select first row only)
-Source 2: https://www.quackit.com/css/css_color_codes.cfm (allowed me to pick the colour)*/
+Source 2: https://www.quackit.com/css/css_color_codes.cfm (allowed me to pick the colour) */
 #firstRow tr:first-child {
   background-color:#FEF5EE;
 } 

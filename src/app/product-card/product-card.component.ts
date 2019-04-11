@@ -21,6 +21,9 @@ export class ProductCardComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
+/** I used Loadash (Library) which has a function called .find; which returns the matched element
+    * Source: https://lodash.com/docs/4.17.11#find [Loadash]
+*/
     if (changes.shoppingCart) {
       let currentProduct = _.find(this.shoppingCart, (o) => { return o.id === this.product.id; });
       console.log("currentProduct", currentProduct);
@@ -33,10 +36,11 @@ export class ProductCardComponent implements OnInit, OnChanges {
 
   }
 
+/** This method adds a product to the cart, the emit function allows other files to use it as an event */
   addToCart(product: Product) {
     this.onAddProduct.emit(product);
   }
-
+/** This method removes a product from the cart, the emit function allows other files to use it as an event */
   removeFromCart(product: Product) {
     this.onRemoveProduct.emit(product);
   }

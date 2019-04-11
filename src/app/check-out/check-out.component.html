@@ -1,3 +1,5 @@
+<!-- The "class = card" templates were re-used from Bootstrap.
+     Source: https://getbootstrap.com/docs/4.3/components/card/ [bootstrap]-->
 <h1>Order</h1>
 <div class="row Center-Container">
   <div class="col-4">
@@ -29,22 +31,28 @@
         <h4 class="card-title">The Wait Begins...</h4>
         <p></p>
         <p></p>
-        <!-- Source: https://stackoverflow.com/questions/30104289/bootstrap-progress-bar-timer?rq=1 -->
+<!-- Here I added the progress bar component, which I found on stackoverflow forum, 
+     I reused the code but adjusted it to my algorithm
+     Source: https://stackoverflow.com/questions/30104289/bootstrap-progress-bar-timer?rq=1 [stackoverflow] -->
         <div class="progress">
           <div #progressBar class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
             <span class="sr-only"></span>
           </div>
         </div>
         <p></p>
+<!-- If the order is active display this message... -->
         <p class="card-text" *ngIf="orderStatus === 'active'" style="font-size: small; font-style: italic;">Order has
           been started! Coming up in {{ this.prepTimeCalculation }} minutes </p>
+<!-- If the order is processing display this message... -->
         <p class="card-text" *ngIf="orderStatus === 'processing'" style="font-size: small; font-style: italic;">Waiting
           for the Chef to start this order </p>
+<!-- If the order is completed display this message... -->
         <p class="card-text" *ngIf="orderStatus === 'completed'" style="font-size: small; font-style: italic;">Few
           seconds away...The Chef just has to plate up and garnish your dish</p>
       </div>
     </div>
   </div>
+<!-- If the order is completed and the status is not off peak (Peak Times), then display this notification card -->
   <div class="Absolute-Center is-Fixed" *ngIf="orderStatus === 'completed' && !offPeak">
     <div class="card text-center border-dark">
       <div class="card-header" style="font-weight: bold; font-size: 25px">
@@ -53,6 +61,7 @@
       <div class="card-body">
         <h5 class="card-title">Food shall arrive to your table soon!</h5>
         <p></p>
+<!-- the button OK sends user to the homepage so that the next user is already at the e-menu page -->
         <a href="#" class="btn btn-primary btn-lg">OK</a>
         <p></p>
         <p class="card-text" style="font-style: italic; font-size: small;">Please press "OK" once the food has arrived</p>
@@ -62,7 +71,9 @@
       </div>
     </div>
   </div>
+<!-- If the order is completed and the status is off peak (Off Peak), then display this notification card -->
   <div class="Absolute-Center is-Fixed" *ngIf="orderStatus === 'completed' && offPeak">
+<!-- This notififcation card is displayed red so that the user is alerted and can see the notification -->
       <div class="card text-center text-white bg-danger border-danger">
         <div class="card-header" style="font-weight: bold; font-size: 25px">
           Notification
@@ -70,6 +81,8 @@
         <div class="card-body">
           <h5 class="card-title">Order Ref: {{ id }}</h5>
           <p>Take a photo of your order reference, for a speedy service!</p>
+<!-- Added an Icon to display how the service works, take a photo of the reference and show it to the person at the front.
+     This was given to me as a user feedback from user testing -->
           <img src="assets/collect-icon.png" style="width:250px;height:125px;">
           <p></p>
           <p style="font-weight: bold;">Show your Order Reference at the front & collect your order</p>

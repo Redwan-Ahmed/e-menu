@@ -9,6 +9,7 @@ import * as _ from 'lodash';
   styleUrls: ['./my-order.component.css']
 })
 export class MyOrderComponent implements OnInit, OnDestroy {
+/** Here all local variables are declared in side this component.ts file */
   orders$: any;
   orderSubscription: Subscription;
   monday: any[] = [];
@@ -24,11 +25,13 @@ export class MyOrderComponent implements OnInit, OnDestroy {
   constructor(private orderService: OrderService) { }
 
   ngOnInit() {
-    this.getAllOrders();
+    this.predictiveOrdering();
     this.filterDay();
   }
 
-  getAllOrders() {
+/** In this method I filter all the orders in the orders collection by day (user selects the day),
+  * then we get all products from the orders from the day selected, & then merge the two arrays together. */
+  predictiveOrdering() {
     this.orderSubscription = this.orderService.getAllOrders().subscribe(orders => {
       this.orders$ = orders;
       console.log(this.orders$);
@@ -100,7 +103,7 @@ export class MyOrderComponent implements OnInit, OnDestroy {
     let sorted = [];
     /** using Loadash to group the products in the array(array passed in the parameter)
      * now the groupedProducts will group the array like this ["name": Steak, "qty": 1]
-     * line 111: this stores each element in the recursive algorithm, and if that element exists then add the qty of that element to that qty in the array.
+     * line 112: this stores each element in the recursive algorithm, and if that element exists then add the qty of that element to that qty in the array.
     */
     let groupedProducts = _.groupBy(array, "name");
     Object.keys(groupedProducts).forEach((key) => {
@@ -144,10 +147,6 @@ export class MyOrderComponent implements OnInit, OnDestroy {
     const inputValue: string = inputElement.value;
     console.log(inputValue);
     this.selectedDay = inputValue;
-    // console.log(this.orders$);
-    // let filter = this.orderService.filterByDay();
-    // console.log(filter);
-
   }
 
   ngOnDestroy() {

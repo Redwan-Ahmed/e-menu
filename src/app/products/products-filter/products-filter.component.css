@@ -1,4 +1,4 @@
-
+/* Allows the html to stay on the screen whilst scrolling (stick on the screen)*/
 .sticky-top {
     top: 80px;
     text-align: center;

@@ -47,7 +47,7 @@ export class ShoppingCartComponent {
     console.log('totalCartPrice', totalCartPrice);
     return totalCartPrice;
   }
-/** Since this is not cormercially available there is no need for payment processors,
+/** Since this is not commercially available there is no need for payment processors,
   * Thus I just push the order to the next page, with the order ID.
 */
   payment(){

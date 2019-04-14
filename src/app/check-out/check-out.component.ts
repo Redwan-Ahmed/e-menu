@@ -39,7 +39,7 @@ export class CheckOutComponent implements OnInit, OnDestroy {
     private orderService: OrderService,
     private authService: AuthService
   ) {
-/** Allows me to get the order ID, by passing the id thorugh the url */
+/** Allows me to get the order ID, by passing the id through the url */
     this.id = this.route.snapshot.paramMap.get('id');
     console.log("this.id", this.id);
 
@@ -49,7 +49,7 @@ export class CheckOutComponent implements OnInit, OnDestroy {
       console.log("AppUser Off Peak", this.offPeak);
     });
 
-/** This is the main logic for the preperation time algorithm (REFINED ALGORITHM for PROGRESS BAR)
+/** This is the main logic for the preparation time algorithm (REFINED ALGORITHM for PROGRESS BAR)
   * First get the order by passing through the order id (this.id) in the getOrderDoc() (CartService).
 */
     if (this.id) this.cartService.getOrderDoc(this.id).subscribe(order => {

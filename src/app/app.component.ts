@@ -15,7 +15,7 @@ export class AppComponent {
  * Source: https://www.udemy.com/the-complete-angular-master-class/learn/v4/t/lecture/7501702?start=0 [Udemy]
 */
   constructor(private userService: UserService, private authService: AuthService, router: Router){
-/** Here we subscribe to the user, through the authService, ans save the user in the local storage */
+/** Here we subscribe to the user, through the authService, and save the user in the local storage */
     authService.user$.subscribe(user => {
       if (!user) return;
         userService.save(user);

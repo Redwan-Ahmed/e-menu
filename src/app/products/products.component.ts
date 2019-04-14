@@ -120,7 +120,7 @@ export class ProductsComponent implements OnInit {
     }
 /** Here I push the model into the checkoutCart() function which then saves the model as an object in the orders collection */
     this.cartService.checkoutCart(this.model).then(res => {
-/** Feed the order ID thorugh the URL */
+/** Feed the order ID through the URL */
       this.router.navigate(['/shopping-cart/' + res]);
     })
     console.log('This Order has been saved!');

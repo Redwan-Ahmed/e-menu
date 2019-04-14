@@ -17,7 +17,7 @@ import 'rxjs/add/operator/take';
 export class ProductFormComponent implements OnDestroy {
 
 /** Here product is just a copy of the Product interface located in the models/product folder
-  *  This is needed in the .html component, when we connect the input fileds with the Product interface, via NgModel.
+  *  This is needed in the .html component, when we connect the input fields with the Product interface, via NgModel.
  */
   product: Product = {
     title: '',

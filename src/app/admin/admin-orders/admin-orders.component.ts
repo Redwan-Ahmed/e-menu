@@ -30,7 +30,7 @@ export class AdminOrdersComponent implements OnInit, OnDestroy {
   }
 
 /** The start() function calls the OrderService: startOrder() function, which takes id as a parameter.
-   * The id is passed thorugh the html file, when the button is clicked (line 36: admin-orders.component.html)
+   * The id is passed through the html file, when the button is clicked (line 36: admin-orders.component.html)
 */
   start(id){
     this.orderService.startOrder(id);

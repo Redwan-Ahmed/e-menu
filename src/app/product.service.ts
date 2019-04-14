@@ -39,7 +39,7 @@ export class ProductService {
     this.prodDoc = this.productDoc.valueChanges();
     return this.prodDoc;
   }
-/** This method uodates an existing product by using the update() function and passing through the product */
+/** This method updates an existing product by using the update() function and passing through the product */
   updateProduct(productId, product) {
     this.productDoc = this.db.doc<Product>('products/' + productId);
     this.productDoc.update(product);
